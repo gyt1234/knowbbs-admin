@@ -155,11 +155,19 @@ export default {
   },
   created() {
     this.activePath = window.sessionStorage.getItem('activePath')
+    this.isLogin()
   },
   methods: {
-    logout() {
-      // window.sessionStorage.clear()
-      // this.$router.push('/login')
+    // 判断管理员是否登录
+    async isLogin() {
+      // const { data: res } = await this.$http.get('/admin/inc/is_manage_login_inc.php')
+      // if (res.code === 500) {
+      //   this.$router.push('/login')
+      // }
+    },
+    async logout() {
+      await this.$http.get('/admin/logout.php')
+      this.$router.push('/login')
     },
     // 点击按钮 切换菜单的折叠和展开
     toggleCollapse() {
