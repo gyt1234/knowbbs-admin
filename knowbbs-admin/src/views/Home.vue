@@ -6,7 +6,10 @@
         <p>知也</p>
         <span>后台管理系统</span>
       </div>
-      <el-button type="info" @click="logout">退出</el-button>
+      <div>
+        <span class='name-title'>欢迎您，{{username}}！</span>
+        <el-button type="info" @click="logout">退出</el-button>
+      </div>
     </el-header>
     <!-- 页面主体区域 -->
     <el-container>
@@ -150,7 +153,9 @@ export default {
       // 是否折叠菜单栏
       isCollapse: false,
       // 被激活的链接地址
-      activePath: ''
+      activePath: '',
+      // 管理员名称
+      username: window.sessionStorage.getItem('username')
     }
   },
   created() {
@@ -207,6 +212,9 @@ export default {
     span{
       margin-left: 20px;
     }
+  }
+  .name-title{
+    font-size: 16px;
   }
 }
 .el-aside{
