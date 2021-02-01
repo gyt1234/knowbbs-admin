@@ -31,6 +31,10 @@
         <el-table-column label="创建时间" prop="create_time"></el-table-column>
         <el-table-column label="操作" width="180px">
           <template slot-scope='scope'>
+            <!-- 详情按钮 -->
+            <el-tooltip effect="dark" content="详情" placement="top" :enterable="false">
+              <el-button type="warning" icon="el-icon-tickets" size="mini" @click='showDialog(scope.row.id)'></el-button>
+            </el-tooltip>
             <!-- 编辑按钮 -->
             <el-tooltip effect="dark" content="编辑" placement="top" :enterable="false">
               <el-button type="primary" icon="el-icon-edit-outline" size="mini" @click='showEditDialog(scope.row.id)'></el-button>
@@ -39,16 +43,12 @@
             <el-tooltip effect="dark" content="删除" placement="top" :enterable="false">
               <el-button type="danger" icon="el-icon-delete" size="mini"></el-button>
             </el-tooltip>
-            <!-- 详情按钮 -->
-            <el-tooltip effect="dark" content="详情" placement="top" :enterable="false">
-              <el-button type="warning" icon="el-icon-tickets" size="mini"></el-button>
-            </el-tooltip>
           </template>
         </el-table-column>
       </el-table>
     </el-card>
     <!-- 新增管理员的对话框 -->
-    <el-dialog title="新增管理员" :visible.sync="addDialogVisible" width="40%" @close="addDialogClosed">
+    <el-dialog title="新增管理员" :visible.sync="addDialogVisible" width="30%" @close="addDialogClosed">
       <!-- 内容主体区域 -->
       <el-form :model="addForm" :rules="addFormrules" ref="addFormRef" label-width="70px">
         <el-form-item label="名称" prop="username">
@@ -75,7 +75,7 @@
       </span>
     </el-dialog>
     <!-- 编辑管理员的对话框 -->
-    <el-dialog title="编辑管理员" :visible.sync="editDialogVisible" width="40%" @close="editDialogClosed">
+    <el-dialog title="编辑管理员" :visible.sync="editDialogVisible" width="30%" @close="editDialogClosed">
       <el-form :model="editForm" :rules="editFormRules" ref="editFormRef" label-width="70px">
         <el-form-item label="名称" prop='name'>
           <el-input v-model="editForm.name"></el-input>
@@ -99,6 +99,28 @@
        <el-button type="primary" @click="editManage">确 定</el-button>
       </span>
     </el-dialog>
+    <!-- 查看管理员详情的的对话框 -->
+    <el-dialog title="管理员详情" :visible.sync="showDialogVisible" width="30%">
+      <el-row :gutter='20'>
+        <el-col :span='6' class='viewClass'>名称：</el-col>
+        <el-col :span='14'>{{editForm.name}}</el-col>
+      </el-row>
+      <el-row :gutter='20'>
+        <el-col :span='6' class='viewClass'>密码：</el-col>
+        <el-col :span='14'>{{editForm.pw}}</el-col>
+      </el-row>
+      <el-row :gutter='20'>
+        <el-col :span='6' class='viewClass'>等级：</el-col>
+        <el-col :span='14'>{{editForm.level === '1'? '普通管理员':'超级管理员'}}</el-col>
+      </el-row>
+      <el-row :gutter='20'>
+        <el-col :span='6' class='viewClass'>创建时间：</el-col>
+        <el-col :span='17'>{{editForm.create_time}}</el-col>
+      </el-row>
+      <span slot="footer" class="dialog-footer">
+       <el-button @click="showDialogVisible = false">取 消</el-button>
+      </span>
+    </el-dialog>
   </div>
 </template>
 
@@ -120,6 +142,8 @@ export default {
       addDialogVisible: false,
       // 控制编辑弹框显示与隐藏
       editDialogVisible: false,
+      // 控制管理员详情弹框的显示与隐藏
+      showDialogVisible: false,
       // 新增管理员的表单数据
       addForm: {
         username: '',
@@ -205,6 +229,7 @@ export default {
     editDialogClosed () {
       this.$refs.editFormRef.resetFields()
     },
+    // 编辑管理员
     editManage() {
       this.$refs.editFormRef.validate(async valid => {
         if (!valid) return
@@ -220,6 +245,12 @@ export default {
         // 重新获取管理员列表数据
         this.getManageList()
       })
+    },
+    // 展示管理员详情的对话框
+    async showDialog (manageId) {
+      const { data: res } = await this.$http.get('/manage_query.php', { params: { id: manageId } })
+      this.editForm = res
+      this.showDialogVisible = true
     }
   }
 }
@@ -228,4 +259,9 @@ export default {
 //.tableHeader{
 //  font-size: 40px;
 //}
+.viewClass{
+  font-weight: bold;
+  text-align: right;
+  height: 25px;
+}
 </style>
