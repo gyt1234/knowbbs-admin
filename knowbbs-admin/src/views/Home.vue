@@ -169,9 +169,12 @@ export default {
       // if (res.code === 500) {
       //   this.$router.push('/login')
       // }
+      if (!window.sessionStorage.getItem('username')) {
+        this.$router.push('/login')
+      }
     },
     async logout() {
-      await this.$http.get('/admin/logout.php')
+      await this.$http.get('/logout.php')
       this.$router.push('/login')
     },
     // 点击按钮 切换菜单的折叠和展开

@@ -7,7 +7,7 @@ import './assets/fonts/iconfont.css'
 // 导入全局样式
 import '../src/assets/css/global.css'
 import axios from 'axios'
-axios.defaults.baseURL = 'http://localhost/knowbbs'
+axios.defaults.baseURL = 'http://localhost/knowbbs/admin'
 axios.defaults.timeout = 5000
 Vue.prototype.$http = axios
 
