@@ -186,7 +186,6 @@ export default {
   },
   created() {
     this.getManageList()
-    console.log(this.radio)
   },
   methods: {
     // 获取管理员列表
@@ -277,9 +276,6 @@ export default {
 }
 </script>
 <style lang='less' scoped>
-//.tableHeader{
-//  font-size: 40px;
-//}
 .viewClass{
   font-weight: bold;
   text-align: right;
