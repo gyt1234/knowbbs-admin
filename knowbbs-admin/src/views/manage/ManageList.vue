@@ -20,6 +20,7 @@
         header-align='center'
         fit
         border
+        height='400'
       >
         <el-table-column type="index"></el-table-column>
         <el-table-column label="名称" prop="name"></el-table-column>
