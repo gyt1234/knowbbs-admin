@@ -205,7 +205,7 @@ export default {
       if (this.level === '0') {
         this.addDialogVisible = true
       } else {
-        return this.$message.info('对不起，您没有权限')
+        return this.$message.warning('对不起，您没有权限')
       }
     },
     // 监听新增管理员对话框的关闭事件
@@ -236,7 +236,7 @@ export default {
         this.editDialogVisible = true
         this.editManageId = manageId
       } else {
-        return this.$message.info('对不起，您没有权限')
+        return this.$message.warning('对不起，您没有权限')
       }
     },
     // 监听修改用户对话框的关闭事件
@@ -287,7 +287,7 @@ export default {
         this.$message.success('删除管理员成功！')
         this.getManageList()
       } else {
-        return this.$message.info('对不起，您没有权限')
+        return this.$message.warning('对不起，您没有权限')
       }
     }
   }

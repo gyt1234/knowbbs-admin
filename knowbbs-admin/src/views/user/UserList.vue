@@ -26,7 +26,7 @@
             <span>{{scope.row.last_time? scope.row.last_time: '--'}}</span>
           </template>
         </el-table-column>
-        <el-table-column label="操作" width="180px">
+        <el-table-column label="操作" width="150px">
           <template slot-scope='scope'>
             <!-- 详情按钮 -->
             <el-tooltip effect="dark" content="详情" placement="top" :enterable="false">
