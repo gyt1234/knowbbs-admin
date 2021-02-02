@@ -176,7 +176,7 @@ export default {
   methods: {
     // 获取父板块列表
     async getFatherList() {
-      const { data: res } = await this.$http.get('/Father.php')
+      const { data: res } = await this.$http.get('/father.php')
       this.fatherList = res
     },
     // 根据名称搜索特定父板块
@@ -256,7 +256,10 @@ export default {
         return this.$message.info('已取消了删除！')
       }
       const { data: res } = await this.$http.get('/father_delete.php', { params: { id: fatherId } })
-      if (res.code !== 200) {
+      if (res.code === 501) {
+        return this.$message.error('该父板块下面存在子版块，请先将子版块删除！')
+      }
+      if (res.code === 500) {
         return this.$message.error('删除父板块失败！')
       }
       this.$message.success('删除父板块成功！')
