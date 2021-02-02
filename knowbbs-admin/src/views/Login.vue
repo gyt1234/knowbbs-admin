@@ -62,6 +62,8 @@ export default {
         if (res.code !== 200) return this.$message.error('登录失败')
         this.$message.success('登录成功')
         window.sessionStorage.setItem('username', res.username)
+        // 保存管理员等级，普通管理员不能进行管理员的增删改
+        window.sessionStorage.setItem('level', res.level)
         this.$router.push('/home')
       })
     }

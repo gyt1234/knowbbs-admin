@@ -10,7 +10,7 @@
           </el-input>
         </el-col>
         <el-col :span="4">
-          <el-button type="primary" @click='addDialogVisible = true'>新增管理员</el-button>
+          <el-button type="primary" @click='addDialog'>新增管理员</el-button>
         </el-col>
       </el-row>
       <!-- 管理员列表区域 -->
@@ -137,6 +137,8 @@ export default {
     return {
       // 查询参数
       query: '',
+      // 管理员等级
+      level: window.sessionStorage.getItem('level'),
       // 管理员列表数据
       manageList: [],
       // 控制新增弹框显示与隐藏
@@ -198,6 +200,14 @@ export default {
       const { data: res } = await this.$http.get('/manage_query.php', { params: { name: this.query } })
       this.manageList = res
     },
+    // 新增管理员弹窗
+    addDialog() {
+      if (this.level === '0') {
+        this.addDialogVisible = true
+      } else {
+        return this.$message.info('对不起，您没有权限')
+      }
+    },
     // 监听新增管理员对话框的关闭事件
     addDialogClosed () {
       this.$refs.addFormRef.resetFields()
@@ -220,10 +230,14 @@ export default {
     },
     // 展示编辑管理员的对话框
     async showEditDialog (manageId) {
-      const { data: res } = await this.$http.get('/manage_query.php', { params: { id: manageId } })
-      this.editForm = res
-      this.editDialogVisible = true
-      this.editManageId = manageId
+      if (this.level === '0') {
+        const { data: res } = await this.$http.get('/manage_query.php', { params: { id: manageId } })
+        this.editForm = res
+        this.editDialogVisible = true
+        this.editManageId = manageId
+      } else {
+        return this.$message.info('对不起，您没有权限')
+      }
     },
     // 监听修改用户对话框的关闭事件
     editDialogClosed () {
@@ -254,23 +268,27 @@ export default {
     },
     // 根据id 删除对应的管理员信息
     async deleteManageById (manageId) {
-      // 弹框询问是否删除
-      const confirmResult = await this.$confirm('此操作将永久删除该管理员, 是否继续?', '提示', {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
-        type: 'warning'
-      }).catch(err => err)
-      // 如果确认删除 则返回值为字符串 confirm
-      // 如果取消删除 则返回值为字符串 cancel
-      if (confirmResult !== 'confirm') {
-        return this.$message.info('已取消了删除！')
+      if (this.level === '0') {
+        // 弹框询问是否删除
+        const confirmResult = await this.$confirm('此操作将永久删除该管理员, 是否继续?', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).catch(err => err)
+        // 如果确认删除 则返回值为字符串 confirm
+        // 如果取消删除 则返回值为字符串 cancel
+        if (confirmResult !== 'confirm') {
+          return this.$message.info('已取消了删除！')
+        }
+        const { data: res } = await this.$http.get('/manage_delete.php', { params: { id: manageId } })
+        if (res.code !== 200) {
+          return this.$message.error('删除管理员失败！')
+        }
+        this.$message.success('删除管理员成功！')
+        this.getManageList()
+      } else {
+        return this.$message.info('对不起，您没有权限')
       }
-      const { data: res } = await this.$http.get('/manage_delete.php', { params: { id: manageId } })
-      if (res.code !== 200) {
-        return this.$message.error('删除管理员失败！')
-      }
-      this.$message.success('删除管理员成功！')
-      this.getManageList()
     }
   }
 }
