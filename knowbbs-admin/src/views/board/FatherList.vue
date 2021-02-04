@@ -31,15 +31,15 @@
           <template slot-scope='scope'>
             <!-- 详情按钮 -->
             <el-tooltip effect="dark" content="详情" placement="top" :enterable="false">
-              <el-button type="warning" icon="el-icon-tickets" size="mini" @click='showDialog(scope.row.id)'></el-button>
+              <i class='el-icon-tickets icons' @click='showDialog(scope.row.id)'></i>
             </el-tooltip>
             <!-- 编辑按钮 -->
             <el-tooltip effect="dark" content="编辑" placement="top" :enterable="false">
-              <el-button type="primary" icon="el-icon-edit-outline" size="mini" @click='showEditDialog(scope.row.id)'></el-button>
+              <i class='el-icon-edit-outline icons' @click='showEditDialog(scope.row.id)'></i>
             </el-tooltip>
             <!-- 删除按钮 -->
             <el-tooltip effect="dark" content="删除" placement="top" :enterable="false">
-              <el-button type="danger" icon="el-icon-delete" size="mini" @click="deleteFatherById(scope.row.id)"></el-button>
+              <i class='el-icon-delete icons' @click="deleteFatherById(scope.row.id)"></i>
             </el-tooltip>
           </template>
         </el-table-column>
@@ -270,5 +270,19 @@ export default {
   font-weight: bold;
   text-align: right;
   height: 25px;
+}
+.icons{
+  font-size: 20px;
+  color: #0086b3;
+}
+.icons:not(:last-child){
+  &::after {
+    content: '|';
+    display: inline-block;
+    color: #cccccc;
+    height: 1px;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
 }
 </style>
