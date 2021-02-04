@@ -34,6 +34,7 @@
           <template slot-scope='scope'>
             <!-- 详情按钮 -->
             <el-tooltip effect="dark" content="详情" placement="top" :enterable="false">
+<!--              <i class='el-icon-tickets'></i>-->
               <el-button type="warning" icon="el-icon-tickets" size="mini" @click='showDialog(scope.row.id)'></el-button>
             </el-tooltip>
             <!-- 编辑按钮 -->
