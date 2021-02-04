@@ -28,7 +28,7 @@
         <el-table-column label="描述" prop="info" show-overflow-tooltip></el-table-column>
         <el-table-column label="排序" prop="sort" width='80'></el-table-column>
         <el-table-column label="创建时间" prop="create_time" width='150'></el-table-column>
-        <el-table-column label="操作" width="180px">
+        <el-table-column label="操作" width="150px">
           <template slot-scope='scope'>
             <!-- 详情按钮 -->
             <el-tooltip effect="dark" content="详情" placement="top" :enterable="false">
@@ -313,20 +313,6 @@ export default {
 ::v-deep{
   .el-select{
     width: 270px;
-  }
-}
-.icons{
-  font-size: 20px;
-  color: #0086b3;
-}
-.icons:not(:last-child){
-  &::after {
-    content: '|';
-    display: inline-block;
-    color: #cccccc;
-    height: 1px;
-    padding-left: 10px;
-    padding-right: 10px;
   }
 }
 </style>

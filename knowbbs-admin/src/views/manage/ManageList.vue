@@ -21,6 +21,7 @@
         fit
         border
         height='400'
+        row-class-name='row-class'
       >
         <el-table-column type="index"></el-table-column>
         <el-table-column label="名称" prop="name"></el-table-column>
@@ -30,7 +31,7 @@
           </template>
         </el-table-column>
         <el-table-column label="创建时间" prop="create_time"></el-table-column>
-        <el-table-column label="操作" width="180px">
+        <el-table-column label="操作" width="150px">
           <template slot-scope='scope'>
             <!-- 详情按钮 -->
             <el-tooltip effect="dark" content="详情" placement="top" :enterable="false">
@@ -302,20 +303,6 @@ export default {
 ::v-deep{
   .el-select{
     width: 300px;
-  }
-}
-.icons{
-  font-size: 20px;
-  color: #0086b3;
-}
-.icons:not(:last-child){
-  &::after {
-    content: '|';
-    display: inline-block;
-    color: #cccccc;
-    height: 1px;
-    padding-left: 10px;
-    padding-right: 10px;
   }
 }
 </style>
