@@ -3,8 +3,8 @@
     <!-- 头部区域 -->
     <el-header>
       <div>
-        <p>知也</p>
-        <span>后台管理系统</span>
+<!--        <p>知也</p>-->
+        <span>知也论坛后台管理系统</span>
       </div>
       <div>
         <span class='name-title'>欢迎您，{{username}}！</span>
