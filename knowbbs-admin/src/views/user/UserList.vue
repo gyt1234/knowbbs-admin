@@ -70,9 +70,6 @@ import Bread from '@/components/Bread'
 export default {
   name: 'UserList',
   components: { Bread },
-  comments: {
-    Bread
-  },
   data() {
     return {
       // 查询参数

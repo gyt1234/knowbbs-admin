@@ -113,9 +113,6 @@ import Bread from '@/components/Bread'
 export default {
   name: 'FatherList',
   components: { Bread },
-  comments: {
-    Bread
-  },
   data() {
     return {
       // 查询参数

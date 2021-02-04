@@ -138,9 +138,6 @@ import Bread from '@/components/Bread'
 export default {
   name: 'SonList',
   components: { Bread },
-  comments: {
-    Bread
-  },
   data() {
     return {
       // 查询参数

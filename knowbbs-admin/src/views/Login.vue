@@ -64,6 +64,7 @@ export default {
         window.sessionStorage.setItem('username', res.username)
         // 保存管理员等级，普通管理员不能进行管理员的增删改
         window.sessionStorage.setItem('level', res.level)
+        window.sessionStorage.setItem('create_time', res.create_time)
         this.$router.push('/home')
       })
     }

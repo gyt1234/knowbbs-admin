@@ -1,6 +1,6 @@
 <template>
   <div>
-    <bread father-title='帖子管理' content-title='帖子列表'></bread>
+    <bread father-title='帖子管理' son-title='帖子列表'></bread>
     <el-card>
       <!-- 搜索与添加区域 -->
       <el-row :gutter="20">
@@ -78,9 +78,6 @@ import Bread from '@/components/Bread'
 export default {
   name: 'ContentList',
   components: { Bread },
-  comments: {
-    Bread
-  },
   data() {
     return {
       // 查询参数
