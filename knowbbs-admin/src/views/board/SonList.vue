@@ -310,4 +310,9 @@ export default {
   text-align: right;
   height: 25px;
 }
+::v-deep{
+  .el-select{
+    width: 270px;
+  }
+}
 </style>
