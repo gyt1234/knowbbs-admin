@@ -1,3 +1,4 @@
+这是知也论坛PC端后台管理系统，采用vue+elementUI+axios开发
 # knowbbs-admin
 
 ## Project setup
